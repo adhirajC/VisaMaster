@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -51,6 +52,30 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
+// Implement Login Page
+const LoginStack = createStackNavigator(
+    {
+        Login: LoginScreen,
+    },
+    config
+);
+
+LoginStack.navigationOptions = {
+    tabBarLabel: 'Login',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
+};
+
+LoginStack.path = '';
+
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
@@ -71,6 +96,7 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  LoginStack
 });
 
 tabNavigator.path = '';
